@@ -1,0 +1,28 @@
+
+/* Good notes about CSS */
+/* This style sheet is only meant to be imported to the corresponding index.html page */
+/* Any styles written inline will overwrite any styles written in this file */
+/* Best to get VSCode extensions for CSS so that color selection and auto-fill is nice */
+
+/* All a tags within a div on hover */
+div a:hover{
+    color:lightgray;
+    text-decoration: underline;
+}
+a:active{
+    color:rgb(163, 163, 163);
+}
+/* All a tags inside of a div in general */
+div a{
+    color: gainsboro;
+    text-decoration: none;
+}
+/* Accesses any object with the ID "dropdownMenuButton1" */
+#dropdownMenuButton1 {
+    box-shadow: none;
+}
+
+.col{
+    background-color: lightsteelblue;
+    border: 1px solid black;
+}

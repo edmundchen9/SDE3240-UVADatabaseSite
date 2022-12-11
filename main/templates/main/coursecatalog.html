@@ -1,0 +1,19 @@
+{% extends 'main/index.html' %}
+<html>
+    {% block content %}
+        <body>
+            <div class="container mt-5">
+                <ul style="list-style-type: none;">
+                    {% for dep in department_results.all %}
+                        {% if forloop.first %}<div class="row">{% endif %}
+                            <div class="col">
+                                <li><a href="{{ dep.abbreviation }}" style="color: black">{{ dep.abbreviation }}</a></li></li>
+                            </div>
+                        {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+                        {% if forloop.last %}</div>{% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </body>
+    {% endblock %}
+</html>

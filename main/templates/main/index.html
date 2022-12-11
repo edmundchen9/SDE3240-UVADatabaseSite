@@ -1,0 +1,71 @@
+{% load socialaccount %}
+{% load static %}
+
+<link rel="stylesheet" href= "{% static 'main/index/style.css'%}?{% now "U" %}">
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+    </head>
+    <body>
+        <div class="mx-auto bg-gradient" class="tab"
+        style="width: 100%; height: 8.5%; background-color:darkslateblue">
+            {% load static %}
+            <div class="d-inline-block position-relative">
+                <img src="{% static "main/images/uvaLogo.png" %}" class="d-inline-block ms-2 pb-2" alt="UVA" />
+                <h4 class="text-center d-inline-block pt-3 ms-2 me-5" style="color:gainsboro">Lou's List 2.0</h4>
+
+                <a href="/main/coursecatalog/" class="d-inline-block mx-2" 
+                {% if tab == 'coursecatalog' %}style="color: rgb(160, 160, 160); font-size:15px;"{% endif %}>
+                Course Catalog</a>
+                
+                <a href="/main/searchclass/" class="d-inline-block mx-2"
+                {% if tab == 'searchclass' %}style="color: rgb(160, 160, 160); font-size:15px;"{% endif %}>
+                Class Search</a>
+                
+                <a href="/main/myschedule/" class="d-inline-block mx-2"
+                {% if tab == 'myschedule' %}style="color: rgb(160, 160, 160); font-size:15px;"{% endif %}>
+                My Schedule</a>
+
+                <a href="/main/shoppingcart/" class="d-inline-block mx-2"
+                {% if tab == 'shoppingcart' %}style="color: rgb(160, 160, 160); font-size:15px;"{% endif %}>
+                Shopping Cart</a>
+
+            </div>
+            {% if user.is_authenticated %}
+                <div class="d-inline-block float-end me-4 dropdown position-relative">
+                    <button class="btn dropdown-toggle position-relative mt-2" type="button" id="dropdownMenuButton1" 
+                    data-bs-toggle="dropdown" aria-expanded="false" style="height: 70%; cursor:pointer;">
+                        <img src="{{user.socialaccount_set.all.0.extra_data.picture}}" 
+                        alt="Welcome, {{user.socialaccount_set.all.0.extra_data.given_name}}"
+                        class="position-relative" id="profile"
+                        style="height: 100%; border-radius: 50%;"/>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="disabled dropdown-item text-dark" href="#">Welcome, {{user.socialaccount_set.all.0.extra_data.given_name}}!</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Friends</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/accounts/logout/">Logout</a></li>
+                    </ul>
+                </div>
+            {% else %}
+            <div class="d-inline-block float-end pt-3 mt-1 me-5 position-relative">
+                <a href="{% provider_login_url 'google' %}" class="text-end"
+                style="color:gainsboro; text-decoration:none; cursor:pointerr;">Sign In</a>
+            </div>
+            {% endif %}
+        </div>
+        {% comment %} The above code is the navbar and then below we can add the content for each page inside block content tag {% endcomment %}
+        {% block content %}
+        {% endblock content %}
+    </body>
+
+</html>
